@@ -1,0 +1,38 @@
+package ad_hoc_problems;
+
+import java.util.*;
+
+public class SecondLargestElement {
+	public static int findSecondLargest(int n, int[] arr) {
+		if (arr.length == 1) return arr[0];
+		int x = arr[0], y = arr[1];
+		if (arr.length > 2) {
+			for (int i = 2; i < arr.length; i++) {
+				if ((arr[i] > x || arr[i] > y) && (arr[i] != x && arr[i] != y)) {
+					if (x < y) x = arr[i];
+					else y = arr[i];
+				}
+			}
+		}
+		if (x == y) {
+			int smallest = arr[0];
+			boolean flag = false;
+			for (int i = 1; i < arr.length; i++) {
+				if (arr[i] < smallest) {
+					smallest = arr[i];
+					flag = true;
+				}
+			}
+			if (!flag) return -1;
+			else return smallest;
+		}
+		return x > y ? y : x; 
+	} 
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int[] arr = {-40,-40,-40,-40,-40,-40};
+		int element = findSecondLargest(arr);
+		System.out.print(element);
+	}
+}
